@@ -1,5 +1,6 @@
 class {
   handleClick(emit, e) {
+    e.preventDefault()
     emit('route', this.input.href)
   }
 }
