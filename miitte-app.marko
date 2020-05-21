@@ -1,2 +1,10 @@
-miitte-header
-miitte-browser
+miitte-router
+  miitte-header
+  miitte-browser
+  miitte-link href='/' -- /
+  miitte-link href='/other_route' -- other_route
+  context|{ route }| from='miitte-router'
+    if(route === '/')
+      span -- /
+    else
+      span -- other

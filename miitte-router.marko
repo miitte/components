@@ -1,0 +1,13 @@
+class {
+  onCreate() {
+    this.state = {
+      route: '/'
+    }
+  }
+  handleRoute(route, yeet, yot, yoot) {
+    this.state.route = route
+  }
+}
+
+context route=state.route on-route('handleRoute')
+  <${input.renderBody}/>

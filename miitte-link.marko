@@ -1,0 +1,11 @@
+class {
+  handleClick(emit, e) {
+    emit('route', this.input.href)
+  }
+}
+context|{ route }, emit| from='miitte-router'
+  ---
+  <a on-click('handleClick', emit)>
+    <${input.renderBody}/>
+  </a>
+  ---
