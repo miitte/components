@@ -1,7 +1,7 @@
 class {
   handleClick(emit, e) {
     e.preventDefault()
-    emit('route', this.input.href)
+    emit('route', new URL(this.input.href, document.baseURI).pathname)
   }
 }
 context|{ route }, emit| from='miitte-router'
