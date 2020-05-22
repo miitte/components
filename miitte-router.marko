@@ -1,7 +1,9 @@
 class {
   onCreate(input) {
     this.state = {
-      route: input.route ? input.route : '/'
+      route: input.route ? input.route : '/',
+      entries: input.entries ? input.entries: [],
+      pendingRequest: false,
     }
   }
   onMount() {
@@ -14,6 +16,7 @@ class {
     window.onpopstate = e => {
       if (e.state === undefined || e.state.route === undefined) return
       this.state.route = e.state.route
+      this.travelTo(e.state.route)
     }
   }
   handleRoute(route) {
@@ -23,8 +26,17 @@ class {
       route: route
     }, document.title, route)
     this.state.route = route
+    this.travelTo(route)
+  }
+  travelTo(route) {
+    fetch('/api/'+route)
+      .then(res => res.json())
+      .then(data => {
+        this.state.entries = data.entries
+        this.forceUpdate()
+      })
   }
 }
 
-context route=state.route on-route('handleRoute')
+context route=state.route entries=state.entries on-route('handleRoute')
   <${input.renderBody}/>

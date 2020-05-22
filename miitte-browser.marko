@@ -1,1 +1,5 @@
 div -- browser
+if(input.entries)
+  for|entry| of=input.entries
+    li
+      miitte-link href=`/${entry}` -- ${entry}
