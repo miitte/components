@@ -3,7 +3,7 @@ class {
     this.state = {
       route: input.route ? input.route : '/',
       entries: input.entries ? input.entries: [],
-      pendingRequest: false,
+      pending: 0,
     }
   }
   onMount() {
@@ -29,14 +29,20 @@ class {
     this.travelTo(route)
   }
   travelTo(route) {
+    this.state.pending++
     fetch('/api/'+route)
       .then(res => res.json())
       .then(data => {
+        this.state.pending--
         this.state.entries = data.entries
         this.forceUpdate()
+      })
+      .catch(err => {
+        this.state.pending--
+        console.log(err)
       })
   }
 }
 
-context route=state.route entries=state.entries on-route('handleRoute')
+context route=state.route entries=state.entries pending=state.pending on-route('handleRoute')
   <${input.renderBody}/>

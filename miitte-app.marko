@@ -1,7 +1,7 @@
 miitte-router route=input.route entries=input.entries
   miitte-header
-  context|{ entries }| from='miitte-router'
-    miitte-browser entries=entries
+  context|{ entries, pending }| from='miitte-router'
+    miitte-browser entries=entries pending=pending
   miitte-link href='/' -- /
   miitte-link href='/other_route' -- other_route
   context|{ route }| from='miitte-router'
