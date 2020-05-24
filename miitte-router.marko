@@ -1,3 +1,5 @@
+import api from '../api.js'
+
 class {
   onCreate(input) {
     this.state = {
@@ -30,8 +32,7 @@ class {
   }
   travelTo(route) {
     this.state.pending++
-    fetch('/api/'+route)
-      .then(res => res.json())
+    api.request(route)
       .then(data => {
         this.state.pending--
         this.state.entries = data.entries
@@ -40,6 +41,7 @@ class {
       .catch(err => {
         this.state.pending--
         console.log(err)
+        alert(err)
       })
   }
 }
