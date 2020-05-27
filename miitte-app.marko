@@ -1,9 +1,10 @@
-miitte-router route=input.route entries=input.entries
+miitte-router route=input.route entries=input.entries entry=input.entry
   miitte-header
-  context|{ entries, pending }| from='miitte-router'
-    miitte-browser entries=entries pending=pending
-  miitte-link href='/' -- /
-  miitte-link href='/other_route' -- other_route
+  context|{ entries, entry, pending }| from='miitte-router'
+    if(input.entry)
+      miitte-image-browser entries=input.entries entry=input.entry
+    else
+      miitte-browser entries=entries pending=pending
   context|{ route }| from='miitte-router'
     if(route === '/')
       span -- /
